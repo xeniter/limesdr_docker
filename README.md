@@ -23,7 +23,10 @@ Contains recipe to build image based on ubuntu 18.04 with follwing software:
     gr-osmosdr
     gr-limesdr
     gqrx
-
+    
+    r-ieee802-11
+    gr-foo
+    
 
 ## Usage
     run ./build.sh to build docker image

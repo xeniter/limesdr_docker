@@ -149,3 +149,36 @@ WORKDIR /gqrx/build/
 RUN cmake ..
 RUN make -j$(nproc)
 RUN make install
+
+# gr-foo
+##########
+RUN apt-get install -y libcppunit-dev
+
+WORKDIR /
+RUN git clone https://github.com/bastibl/gr-foo.git -b maint-3.7
+
+WORKDIR /gr-foo/build/
+RUN cmake ..
+RUN make -j$(nproc)
+RUN make install
+RUN ldconfig
+
+# gr-ieee802-11
+################
+WORKDIR /
+RUN git clone https://github.com/bastibl/gr-ieee802-11 -b maint-3.7
+
+WORKDIR /gr-ieee802-11/build/
+RUN cmake ..
+RUN make -j$(nproc)
+RUN make install
+RUN ldconfig
+
+
+WORKDIR /
+
+# for limeutil --update
+RUN apt-get install -y wget
+
+
+

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# hack but works
+xhost +
+
 sudo docker run \
   -it --rm --privileged \
   -e DISPLAY=$DISPLAY \
