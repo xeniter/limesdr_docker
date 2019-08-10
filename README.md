@@ -28,4 +28,7 @@ Contains recipe to build image based on ubuntu 18.04 with follwing software:
 ## Usage
     run ./build.sh to build docker image
     run ./run.sh to start docker image
+    connect limedsdr to your pc
+    run "LimeUtil --find"
+    it should show something like "[LimeSDR-USB, media=USB 3.0, module=FX3, addr=1d50:6108, serial=...]
 
