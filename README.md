@@ -25,9 +25,7 @@ Contains recipe to build image based on ubuntu 18.04 with follwing software:
     gqrx
 
 
-
 ## Usage
-
- run ./build.sh to build docker image
- run ./run.sh to start docker image
+    run ./build.sh to build docker image
+    run ./run.sh to start docker image
 
