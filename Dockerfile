@@ -74,6 +74,23 @@ RUN cmake ..
 RUN make -j$(nproc)
 RUN make install
 
+# UHD
+# https://files.ettus.com/manual/page_build_guide.html
+#########################################################
+RUN apt-get install -y libboost-all-dev libusb-1.0-0-dev python3-mako python3-numpy python3-requests python3-setuptools doxygen python-docutils cmake build-essential
+
+WORKDIR /
+RUN git clone --recursive git://github.com/EttusResearch/uhd.git
+WORKDIR /uhd/
+RUN git submodule init
+RUN git submodule update
+
+WORKDIR /uhd/host/build/
+RUN cmake ..
+RUN make -j$(nproc)
+RUN make install
+RUN ldconfig
+
 # GNURADIO
 ############
 RUN apt-get install -y liblog4cpp5-dev
@@ -93,11 +110,7 @@ RUN apt-get install -y python-qt4 python-qwt5-qt4 libqt4-opengl-dev libqwt5-qt4-
 
 
 WORKDIR /
-#RUN git clone  --recursive https://github.com/gnuradio/gnuradio.git -b maint-3.7
 RUN git clone https://github.com/gnuradio/gnuradio.git -b maint-3.7
-#RUN git clone https://github.com/gnuradio/gnuradio.git
-#RUN git clone --recursive https://github.com/gnuradio/gnuradio.git
-
 
 WORKDIR /gnuradio/build/
 RUN cmake -DENABLE_INTERNAL_VOLK=OFF -DCMAKE_BUILD_TYPE=Release ..
@@ -174,11 +187,22 @@ RUN make -j$(nproc)
 RUN make install
 RUN ldconfig
 
+# SoapyUHD
+###########
+WORKDIR /
+RUN git clone https://github.com/pothosware/SoapyUHD.git
+
+WORKDIR /SoapyUHD/build/
+RUN cmake ..
+RUN make -j$(nproc)
+RUN make install
+
 
 WORKDIR /
 
 # for limeutil --update
 RUN apt-get install -y wget
+RUN apt-get install -y xterm #gnuradio
 
 
 
