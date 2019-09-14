@@ -11,5 +11,6 @@ sudo docker run \
   -v /dev/bus/usb:/dev/bus/usb \
   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
   -v /run/user/1000/pulse:/run/user/1000/pulse \
+  -v /home/xeniter/Schreibtisch/LIME/limesdr_docker/mnt:/mnt/ \
   limesdr-toolkit "$@"
 
