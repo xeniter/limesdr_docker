@@ -6,17 +6,21 @@ A docker recipe for a full working limesdr suite
 ### Build it yourself:
     comment "RUN volk_profile" in the Dockerfile, so volk profil fits to your cpu
     run ./build.sh to build docker image
+    be aware build time depends on your cpu and could take up to one hour or more + downloading all packages
     
 ### Or download it from dockerhub
     docker pull xeniter/ubuntu1804_limesdr_toolkit_v1
+    be aware image size is quite big ~3G
 
 ### Start Image    
     run ./run.sh to start docker image
     connect limedsdr to your pc
     run "LimeUtil --find"
     it should show something like "[LimeSDR-USB, media=USB 3.0, module=FX3, addr=1d50:6108, serial=...]
-    
-## 
+
+### Feedback and Communication
+ https://etherpad.servus.at/p/limesdr
+ 
 
 ## Dockerfile
 
