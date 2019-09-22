@@ -42,7 +42,7 @@ Contains recipe to build image based on ubuntu 18.04 with follwing software:
     gr-foo
     SoapyUHD
     
-    Image is available on docker hub:
+### Image is available on docker hub:
     https://cloud.docker.com/repository/docker/xeniter/ubuntu1804_limesdr_toolkit_v1/general
 
 ### based on (and special thanks to)
