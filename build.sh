@@ -1,4 +1,4 @@
 #!/bin/bash
-docker build -t limesdr-toolkit .
+docker build -t xeniter/ubuntu1804_limesdr_toolkit_v1 .
 
 

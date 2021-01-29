@@ -1,6 +1,14 @@
 # limesdr_docker
 A docker recipe for a full working limesdr suite
 
+## Changelog
+
+### 29.1.2021
+
+    changed uhd from master to UHD-3.9.LTS
+    changed gr-osmosdr from master to branch gr3.7
+    pushed image to dockerhub
+
 ## Usage
 
 ### Build it yourself:

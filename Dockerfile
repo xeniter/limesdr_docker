@@ -69,7 +69,7 @@ RUN make install
 # VOLK
 ########
 WORKDIR /
-RUN git clone https://github.com/gnuradio/volk.git
+RUN git clone --recursive https://github.com/gnuradio/volk.git
 
 WORKDIR /volk/build/
 RUN cmake  ..
@@ -96,6 +96,7 @@ RUN make install
 WORKDIR /
 RUN git clone --recursive git://github.com/EttusResearch/uhd.git
 WORKDIR /uhd/
+RUN git checkout UHD-3.9.LTS
 RUN git submodule init
 RUN git submodule update
 
@@ -132,6 +133,9 @@ RUN make install
 #############
 WORKDIR /
 RUN git clone https://git.osmocom.org/gr-osmosdr
+
+WORKDIR /gr-osmosdr
+RUN git checkout gr3.7
 
 WORKDIR /gr-osmosdr/build/
 RUN cmake ..
