@@ -3,6 +3,13 @@ A docker recipe for a full working limesdr suite
 
 ## Changelog
 
+### 15.3.2021
+    
+    add pythonpath to start gnuradio-companion
+    add wireshark,kate
+    added entrypoint.sh
+    update readme
+
 ### 29.1.2021
 
     changed uhd from master to UHD-3.9.LTS
@@ -11,8 +18,7 @@ A docker recipe for a full working limesdr suite
 
 ## Usage
 
-### Build it yourself:
-    comment "RUN volk_profile" in the Dockerfile, so volk profil fits to your cpu
+### Build it yourself:    
     run ./build.sh to build docker image
     be aware build time depends on your cpu and could take up to one hour or more + downloading all packages
     
@@ -37,7 +43,7 @@ Checks out Source code and builds docker image
 Be aware cause its build from latest master git repositories, source code can changed and building complete suite could easily fail with new commits.
 Cause gr-lime and gr-osmosdr doesn't find gnuradio in version 3.8 i use brancht for 3.7 and not master for gnuradio.
 
-Contains recipe to build image based on ubuntu 18.04 with follwing software:
+Contains recipe to build image based on ubuntu 20.04 with follwing software:
 
     LimeSuite
     SoapySDR
@@ -64,11 +70,17 @@ Contains recipe to build image based on ubuntu 18.04 with follwing software:
 ## Usefull commands
     LimeUtil --find
     LimeUtil --update
+    
     gnuradio-companion
+    
     SoapySDRUtil --probe
     SoapySDRUtil --find="driver=lime"
+    
     gqrx (set device string to "soapy=0,driver=lime")
+    
     uhd_find_devices
+    uhd_usrp_probe
+    
     LimeQuickTest
     LimeSuiteGUI
     
