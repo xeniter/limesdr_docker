@@ -25,7 +25,13 @@ RUN apt-get update && \
     apt-get -y install python-mako python-six libboost-all-dev && \
     # uhd
     apt-get -y install libboost-all-dev libusb-1.0-0-dev python3-mako python3-numpy python3-requests python3-setuptools doxygen python-docutils cmake build-essential && \
-    
+    # pothos
+    apt-get -y install \
+    libnuma-dev cmake g++ \
+    libpython-all-dev python-numpy \
+    qtbase5-dev libqt5svg5-dev libqt5opengl5-dev libqwt-qt5-dev \
+    portaudio19-dev libjack-jackd2-dev \
+    graphviz && \
     # https://wiki.gnuradio.org/index.php/UbuntuInstall#Focal_Fossa_.2820.04.29
     apt -y install git cmake g++ libboost-all-dev libgmp-dev swig python3-numpy python3-mako python3-sphinx python3-lxml doxygen libfftw3-dev libsdl1.2-dev libgsl-dev libqwt-qt5-dev libqt5opengl5-dev python3-pyqt5 liblog4cpp5-dev libzmq3-dev python3-yaml python3-click python3-click-plugins python3-zmq python3-scipy python3-gi python3-gi-cairo gobject-introspection gir1.2-gtk-3.0 && \
     
@@ -86,21 +92,24 @@ RUN volk_profile
 
 # pothos
 ##########
-WORKDIR /
-RUN git clone --recursive https://github.com/pothosware/PothosCore.git
-
-WORKDIR /PothosCore/build/
-RUN pwd
-RUN ls -la ../
-RUN cmake ..
-RUN make -j$(nproc)
-RUN make install
+#WORKDIR /
+#RUN git clone --recursive https://github.com/pothosware/PothosCore.git
+#
+#WORKDIR /PothosCore/
+#RUN git submodule update --init --recursive --remote
+#WORKDIR /PothosCore/build/
+#RUN cmake .. || true
+#RUN cmake ..
+#RUN make -j$(nproc)
+#RUN make install
+#RUN ldconfig
+#RUN PothosUtil --self-tests
 
 # UHD
 # https://files.ettus.com/manual/page_build_guide.html
 #########################################################
 WORKDIR /
-RUN git clone --recursive git://github.com/EttusResearch/uhd.git
+RUN git clone --recursive https://github.com/EttusResearch/uhd.git
 WORKDIR /uhd/
 #RUN git checkout UHD-3.9.LTS
 RUN git submodule init
