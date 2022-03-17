@@ -90,16 +90,16 @@ Contains recipe to build image based on ubuntu 20.04 with follwing software:
     LimeSuiteGUI
     
 ## usefull links
-    https://github.com/emvivre/limesdr_toolbox
-    http://blog.reds.ch/?p=43
-    https://github.com/sparklespdx/limesdr-toolkit-docker
+    <https://github.com/emvivre/limesdr_toolbox>
+    <http://blog.reds.ch/?p=43>
+    <https://github.com/sparklespdx/limesdr-toolkit-docker>
 
 ### Gateware
-    https://github.com/myriadrf/LimeSDR-USB_GW
-    https://github.com/halfmanhalftaco/fpga-docker
+    <https://github.com/myriadrf/LimeSDR-USB_GW>
+    <https://github.com/halfmanhalftaco/fpga-docker>
     
     
 ### Docker
-    https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf
+    <https://hackernoon.com/publish-your-docker-image-to-docker-hub-10b826793faf>
     
     
