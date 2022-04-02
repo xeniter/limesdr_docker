@@ -3,6 +3,10 @@ A docker recipe for a full working limesdr suite
 
 ## Changelog
 
+### 2.4.2022
+
+    SoapyRemote added
+    
 ### 17.3.2022
 
     comment pothos out (cmake error)
@@ -80,6 +84,7 @@ Contains recipe to build image based on ubuntu 20.04 with follwing software:
     
     SoapySDRUtil --probe
     SoapySDRUtil --find="driver=lime"
+    SoapySDRServer --bind
     
     gqrx (set device string to "soapy=0,driver=lime")
     

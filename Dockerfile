@@ -239,7 +239,19 @@ RUN apt-get install libpulse-dev pulseaudio -y
 # RUN make -j$(nproc)
 # RUN make install
 
-# TODO
+
+# Soapy Remote
+###############
+WORKDIR /
+RUN git clone https://github.com/pothosware/SoapyRemote.git
+WORKDIR /SoapyRemote/build/
+RUN cmake ..
+RUN make -j$(nproc)
+RUN make install
+
+
+
+
 
 # entrypoint
 COPY entrypoint.sh /entrypoint.sh

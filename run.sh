@@ -14,6 +14,7 @@ sudo docker run \
   -u root \
   -v /run/user/1000/pulse:/run/user/1000/pulse \
   -v /home/nios/Desktop/LIME/limesdr_docker/mnt/:/root/ \
+  -v /home/nios/:/home/nios/ \
   xeniter/ubuntu2004_limesdr_toolkit_gr3-8:latest /bin/bash
   
   
