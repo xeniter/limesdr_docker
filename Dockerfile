@@ -56,6 +56,17 @@ RUN apt-get update && \
     # cleanup
     rm -rf /var/lib/apt/lists/*
 
+# pulseaudio
+#############
+RUN apt-get install libpulse-dev pulseaudio -y
+
+# for VI
+RUN apt-get update && apt-get install vim -y
+
+# for spectogram python demo
+RUN apt-get install python3-matplotlib -y
+RUN apt-get install python3-skimage -y
+
 # SoapySDR
 ############
 WORKDIR /
@@ -65,180 +76,6 @@ WORKDIR /SoapySDR/build
 RUN cmake ..
 RUN make -j$(nproc)
 RUN make install
-
-
-# LimeSuite
-###############
-WORKDIR /
-RUN git clone https://github.com/myriadrf/LimeSuite.git
-
-WORKDIR /LimeSuite/build/
-RUN cmake ..
-RUN make -j$(nproc)
-RUN make install
-
-
-# VOLK
-########
-WORKDIR /
-RUN git clone --recursive https://github.com/gnuradio/volk.git
-
-WORKDIR /volk/build/
-RUN cmake  ..
-RUN make -j$(nproc)
-RUN make install
-RUN ldconfig
-RUN volk_profile
-
-# pothos
-##########
-#WORKDIR /
-#RUN git clone --recursive https://github.com/pothosware/PothosCore.git
-#
-#WORKDIR /PothosCore/
-#RUN git submodule update --init --recursive --remote
-#WORKDIR /PothosCore/build/
-#RUN cmake .. || true
-#RUN cmake ..
-#RUN make -j$(nproc)
-#RUN make install
-#RUN ldconfig
-#RUN PothosUtil --self-tests
-
-# UHD
-# https://files.ettus.com/manual/page_build_guide.html
-#########################################################
-WORKDIR /
-RUN git clone --recursive https://github.com/EttusResearch/uhd.git
-WORKDIR /uhd/
-#RUN git checkout UHD-3.9.LTS
-RUN git submodule init
-RUN git submodule update
-
-WORKDIR /uhd/host/build/
-RUN cmake ..
-RUN make -j$(nproc)
-RUN make install
-RUN ldconfig
-
-
-# GNURADIO
-############
-WORKDIR /
-RUN git clone https://github.com/gnuradio/gnuradio.git -b maint-3.8
-
-WORKDIR /gnuradio/build/
-RUN cmake -DENABLE_INTERNAL_VOLK=OFF -DCMAKE_BUILD_TYPE=Release ..
-RUN make -j$(nproc)
-RUN make install
-
-
-# RTL SDR
-###########
-WORKDIR /
-RUN git clone https://github.com/osmocom/rtl-sdr.git
-
-WORKDIR /rtl-sdr/build/
-RUN cmake ..
-RUN make -j$(nproc)
-RUN make install
-
-
-# gr-osmosdr
-#############
-WORKDIR /
-RUN git clone https://git.osmocom.org/gr-osmosdr
-
-WORKDIR /gr-osmosdr
-RUN git checkout gr3.8
-
-WORKDIR /gr-osmosdr/build/
-RUN cmake ..
-RUN make -j$(nproc)
-RUN make install
-
-
-# gr-limesdr
-#############
-WORKDIR /
-RUN git clone https://github.com/myriadrf/gr-limesdr
-
-WORKDIR /gr-limesdr/
-RUN git checkout gr-3.8
-
-WORKDIR /gr-limesdr/build/
-RUN cmake ..
-RUN make -j$(nproc)
-RUN make install
-RUN ldconfig
-
-# gqrx
-#######
-WORKDIR /
-RUN git clone https://github.com/csete/gqrx.git
-
-WORKDIR /gqrx/build/
-RUN cmake ..
-RUN make -j$(nproc)
-RUN make install
-
-
-# gr-foo
-##########
-WORKDIR /
-RUN git clone https://github.com/bastibl/gr-foo.git -b maint-3.8
-
-WORKDIR /gr-foo/build/
-RUN cmake ..
-
-RUN make -j$(nproc)
-RUN make install
-
-RUN ldconfig
-
-
-# gr-ieee802-11
-################
-WORKDIR /
-RUN git clone https://github.com/bastibl/gr-ieee802-11 -b maint-3.8
-
-WORKDIR /gr-ieee802-11/build/
-RUN cmake ..
-
-RUN make -j$(nproc)
-RUN make install
-
-RUN ldconfig
-
-
-# SoapyUHD
-###########
-WORKDIR /
-RUN git clone https://github.com/pothosware/SoapyUHD.git
-
-WORKDIR /SoapyUHD/build/
-RUN cmake ..
-
-RUN make -j$(nproc)
-RUN make install
-
-WORKDIR /
-
-
-# pulseaudio
-#############
-RUN apt-get install libpulse-dev pulseaudio -y
-
-# WORKDIR /
-# #RUN git clone https://github.com/bitglue/gr-pulseaudio
-# # fork to work with gr 3.8
-# RUN git clone https://github.com/xeniter/gr-pulseaudio.git
-
-# WORKDIR /gr-pulseaudio/build/
-# RUN cmake ..
-# RUN make -j$(nproc)
-# RUN make install
-
 
 # Soapy Remote
 ###############
@@ -250,8 +87,32 @@ RUN make -j$(nproc)
 RUN make install
 
 
+# gqrx for spectrogram
+#######################
+WORKDIR /
+RUN git clone https://github.com/gasparka/gqrx
 
+WORKDIR /gqrx/build/
+RUN cmake .. -DCMAKE_CXX_STANDARD_LIBRARIES="-lSoapySDR"
+RUN make -j$(nproc)
+RUN make install
 
+# LimeSuite for spectrogram
+#############################
+WORKDIR /
+RUN git clone https://github.com/xeniter/LimeSuite.git
+
+WORKDIR /LimeSuite/
+# 40mhz lime mini version
+#RUN git checkout 3e778bb8af8e89ee208135871d51c67af96e7f23
+RUN git checkout fpga_fft
+
+WORKDIR /LimeSuite/build/
+RUN cmake ..
+RUN make -j$(nproc)
+RUN make install
+
+RUN ldconfig
 
 # entrypoint
 COPY entrypoint.sh /entrypoint.sh
